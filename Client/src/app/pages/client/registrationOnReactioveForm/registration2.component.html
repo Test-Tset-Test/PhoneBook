@@ -1,0 +1,121 @@
+<app-pec-modal id="pec-modal2">
+
+
+  <ng-template #listErrors let-errors="errors">
+    <div *ngFor="let error of errors">
+      <ng-container [ngSwitch]="error">
+        <ng-container *ngSwitchCase="'required'">Это поле пустое</ng-container>
+        <ng-container *ngSwitchCase="'pattern'">Некорректно заполнено поле. Пароль должен быть из букв латиницы, минимум одна большая и маленькие буквы, минимум одна цыфра, длина пароля не менеее 6 символов</ng-container>
+        <ng-container *ngSwitchCase="'maxlength'">Превышена максимальная длина</ng-container>
+        <ng-container *ngSwitchCase="'passwordValidator'">Field does not match Password</ng-container>
+      </ng-container>
+    </div>
+  </ng-template>
+
+  <div class="container">
+    <form class="user-form" [formGroup]="userForm">
+      <div class="regEvil"><h1>Register new Evil Cookies</h1></div>
+      <hr>
+      <div class="form-group">
+        <label for="name"><b>FirstName</b></label>
+        <input type="text"
+               id="name"
+               placeholder="Enter FirstName"
+               formControlName="firstName"
+               [(ngModel)]="user.firstName"/>
+      </div>
+      <div class="error" *ngIf="isControlInvalid('firstName') && getControlErrors('firstName').length > 0">
+        <ng-container [ngTemplateOutlet]="listErrors" [ngTemplateOutletContext]="{errors: getControlErrors('firstName')}">
+        </ng-container>
+      </div>
+
+        <div class="form-group">
+          <label for="lastName"><b>LastName</b></label>
+          <input type="text"
+                 id="lastName"
+                 placeholder="Enter LastName"
+                 formControlName="lastName"
+                 [(ngModel)]="user.lastName"/>
+        </div>
+      <div class="error" *ngIf="isControlInvalid('lastName') && getControlErrors('lastName').length > 0">
+        <ng-container [ngTemplateOutlet]="listErrors" [ngTemplateOutletContext]="{errors: getControlErrors('lastName')}">
+        </ng-container>
+      </div>
+
+      <div class="form-group">
+        <label for="phone"><b>Phone</b></label>
+        <input type="text"
+               id="phone"
+               placeholder="Enter phone"
+               formControlName="phone"
+               [(ngModel)]="user.phone"/>
+      </div>
+      <div class="error" *ngIf="isControlInvalid('phone') && getControlErrors('phone').length > 0">
+        <ng-container [ngTemplateOutlet]="listErrors" [ngTemplateOutletContext]="{errors: getControlErrors('phone')}">
+        </ng-container>
+      </div>
+
+      <div class="form-group">
+        <label for="email"><b>Email</b></label>
+        <input id="email"
+               type="text"
+               placeholder="Enter Email"
+               name="email"
+               formControlName="email"
+               required email
+               [(ngModel)]="user.email"/>
+      </div>
+      <div class="error" *ngIf="isControlInvalid('email') && getControlErrors('email').length > 0">
+        <ng-container [ngTemplateOutlet]="listErrors" [ngTemplateOutletContext]="{errors: getControlErrors('email')}">
+        </ng-container>
+      </div>
+
+      <div class="form-group">
+        <label for="age"><b>Age</b></label>
+        <input type="date"
+               id="age"
+               placeholder="Enter Age"
+               formControlName="age"
+               (keydown) = "$event.preventDefault()"
+               required [max]="maxBirthday"
+               [(ngModel)]="user.age"/>
+      </div>
+      <div class="error" *ngIf="isControlInvalid('age') && getControlErrors('age').length > 0">
+        <ng-container [ngTemplateOutlet]="listErrors" [ngTemplateOutletContext]="{errors: getControlErrors('age')}">
+        </ng-container>
+      </div>
+
+        <div class="form-group">
+          <label for="psw"><b>Password</b></label>
+          <input id="psw"
+                 type="password"
+                 placeholder="Enter Password"
+                 name="psw"
+                 formControlName="password"
+                 [(ngModel)]="user.password"/>
+        </div>
+      <div class="error" *ngIf="isControlInvalid('password') && getControlErrors('password').length > 0">
+        <ng-container [ngTemplateOutlet]="listErrors" [ngTemplateOutletContext]="{errors: getControlErrors('password')}">
+        </ng-container>
+      </div>
+
+        <div class="form-group">
+          <label for="psw-repeat"><b>Repeat Password</b></label>
+          <input id="psw-repeat"
+                 type="password"
+                 placeholder="Repeat Password"
+                 name="psw-repeat"
+                 formControlName="passwordRepeat"
+                 [(ngModel)]="user.passwordRepeat"/>
+        </div>
+        <div class="error">
+          <ng-container [ngTemplateOutlet]="listErrors" [ngTemplateOutletContext]="{errors: getControlErrors('passwordRepeat')}">
+          </ng-container>
+        </div>
+      <div class="subbtn">
+        <button type="submit" class="registrationbtn" (click)="createNewUser('pec-modal2', $event.target.value)">Register</button>
+        <button class="registrationbtn" (click)="closeModal('pec-modal2');">Cancel</button>
+      </div>
+    </form>
+  </div>
+</app-pec-modal>

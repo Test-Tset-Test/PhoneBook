@@ -1,0 +1,21 @@
+
+.main-item {
+  max-width: 10%;
+}
+
+.item {
+  width: calc((200px - 24px * 2) / 2);
+  margin-top: 24px;
+  float: left;
+  color: #669;
+  display: flex;
+  justify-content: center;
+  height: 20px;
+}
+
+.item:nth-child(2n+2) {
+  margin-right: 0;
+  float: right;
+  color: #669;
+  border-bottom: 1px solid #e8edff;
+}

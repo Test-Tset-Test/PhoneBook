@@ -1,0 +1,33 @@
+<!--<div>
+  <div>
+    <table *ngFor="let userito of userListForEdit">
+      <tr><th>Name</th><td>{{userito?.first_name}}</td></tr>
+      <tr><th>LastName</th><td>{{userito?.last_name}}</td></tr>
+      <tr><th>Phone</th><td>{{userito?.phone}}</td></tr>
+      <tr><th>E-mail</th><td>{{userito?.email}}</td></tr>
+      <tr><th>Age</th><td>{{userito?.age}}</td></tr>
+    </table>
+    <div></div>
+  </div>
+</div>-->
+
+<!--<div class="table" *ngFor="let userito of userListForEdit">
+    <div class="content-left">{{userito?.first_name}}</div>
+&lt;!&ndash;    <div class="header-right">asdf</div>&ndash;&gt;
+</div>-->
+
+<div>
+  <h2>PAGE EVIL COOKIE:</h2>
+  <div class="main-item" *ngFor="let userito of userListForEdit">
+    <div class="item">Name</div>
+    <div class="item">{{userito?.first_name}}</div>
+    <div class="item">LastName</div>
+    <div class="item">{{userito?.last_name}}</div>
+    <div class="item">Phone</div>
+    <div class="item">{{userito?.phone}}</div>
+    <div class="item">E-mail</div>
+    <div class="item">{{userito?.email}}</div>
+    <div class="item">Age</div>
+    <div class="item">{{userito?.age}}</div>
+  </div>
+</div>

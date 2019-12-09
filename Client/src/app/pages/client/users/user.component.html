@@ -1,0 +1,31 @@
+<div>
+  <div>
+    <label class="block_search">
+      <span>Search</span>
+      <input type="search" class="search" id="search" placeholder="Search..." (keyup)="searchUser($event.target.value)">
+    </label>
+  </div>
+  <table>
+    <tr>
+      <th>Name</th>
+      <th>LastName</th>
+      <th>Age</th>
+      <th>Phone</th>
+      <th>Email</th>
+    </tr>
+    <tr *ngFor="let user of userList">
+      <td><a [routerLink]='["/userPhoneBook",user.id ]'>{{user.first_name}}</a></td>
+      <td>{{user.last_name}}</td>
+      <td>{{user.age}}</td>
+      <td>{{user.phone}}</td>
+      <td>{{user.email}}</td>
+      <td><button class="registrationbtn" (click)="deleteSelectedUser(user.id)">Delete</button></td>
+      <td><button class="registrationbtn" (click)="editUserComponent.openModal('pec-modalEdit', user.id)">Edit</button></td>
+    </tr>
+  </table>
+</div>
+
+<app-employees-editing></app-employees-editing>
+<app-registration (updateUserList)="getUserList()"></app-registration>
+<app-registration2 (updateUserList)="getUserList()"></app-registration2>
+<app-employees-editing (updateUserList)="getUserList()"></app-employees-editing>

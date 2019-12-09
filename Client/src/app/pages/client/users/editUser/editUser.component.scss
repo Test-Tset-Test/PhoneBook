@@ -1,0 +1,31 @@
+.registrationbtn {
+  border-radius: 45px;
+  margin: 10px 20px;
+  background: white;
+  box-shadow: 0 8px 15px rgba(0,0,0,.1);
+  transition: .3s;
+  width: 300px;
+  height: 46px;
+}
+
+.registrationbtn:hover {
+  background: #2EE59D;
+  box-shadow: 0 15px 20px rgba(46,229,157,.4);
+  color: white;
+  transform: translateY(-3px);
+  width: 300px;
+  height: 46px;
+}
+
+input {
+  width: 10%;
+  font-size: 13px;
+  padding: 6px 0 4px 10px;
+  border: 1px solid #cecece;
+  background: #F6F6f6;
+  border-radius: 8px;
+}
+
+.subbtn {
+  text-align: center;
+}
