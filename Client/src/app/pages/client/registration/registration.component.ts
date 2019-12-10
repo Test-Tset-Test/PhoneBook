@@ -4,6 +4,7 @@ import {NgForm, NgModel} from '@angular/forms';
 import {UserModel} from '../../../models/user.model';
 import {take} from 'rxjs/operators';
 import {UserService} from '../../../service/user.service';
+import {AddUserRequest} from "../../../api/Model/user.model";
 
 @Component({
   selector: 'app-registration',
@@ -12,7 +13,7 @@ import {UserService} from '../../../service/user.service';
 })
 export class RegistrationComponent implements OnInit {
   @Output()
-  updateUserList = new EventEmitter();
+  userChange = new EventEmitter();
 
   maxBirthday: string;
   user: UserModel = {
@@ -36,11 +37,19 @@ export class RegistrationComponent implements OnInit {
   ngOnInit() {
   }
 
-  createNewUser(form: NgForm, idForClosedModal: string, event: any) {
+  createNewUser(form: NgForm, idForClosedModal: string) {
     this.onSubmit(form, idForClosedModal);
-    this.serviceApi.addNewUserInPhoneBook(this.user).pipe(take(1)).subscribe(() => {
+    const payLoad: AddUserRequest = {
+      first_name: this.user.firstName,
+      last_name: this.user.lastName,
+      phone: this.user.phone,
+      email: this.user.email,
+      password: this.user.password,
+      age: this.user.age,
+    };
+    this.serviceApi.addNewUserInPhoneBook(payLoad).pipe(take(1)).subscribe(() => {
       // UpdateUserList
-      this.updateUserList.emit(event);
+      this.userChange.emit();
       this.onSubmit(form, idForClosedModal);
       this.closeModal(idForClosedModal);
     });
@@ -71,10 +80,6 @@ export class RegistrationComponent implements OnInit {
     const errors: string[] = Object.keys(control.errors);
     return errors;
   }
-
-  // updateChoiceEmployee(id: string) {
-  //   this.modalService.close(id);
-  // }
 
   onSubmit(form: NgForm, idForClosedModal: string) {
     const controls = form.controls;

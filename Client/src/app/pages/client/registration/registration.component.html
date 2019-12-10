@@ -11,7 +11,7 @@
   </ng-template>
 
   <div class="container">
-    <form #form="ngForm" class="user-form" (submit)="onSubmit(form)">
+    <form #form="ngForm" class="user-form">
       <div class="regEvil"><h1>Register new Evil Cookies</h1></div>
       <hr>
 
@@ -140,7 +140,7 @@
       </div>
 
       <div class="subbtn">
-        <button type="submit" class="registrationbtn" (click)="createNewUser(form, 'pec-modal', $event.target.value)">Register</button>
+        <button type="submit" class="registrationbtn" (click)="createNewUser(form, 'pec-modal')">Register</button>
         <button class="registrationbtn" (click)="closeModal('pec-modal');">Cancel</button>
       </div>
     </form>

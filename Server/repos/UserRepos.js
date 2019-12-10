@@ -62,7 +62,6 @@ class UserRepos {
     }
 
     updateUser(userObjectForUpdate) {
-        console.log(userObjectForUpdate.body.age);
         return new Promise(function (resolve, reject) {
             connection.query(
                 "UPDATE phone_book SET phone_book.first_name=?, phone_book.last_name=?, phone_book.phone=?, phone_book.email=?, phone_book.age=? WHERE id = ?",
@@ -79,16 +78,14 @@ class UserRepos {
     }
 
     getUserById(id) {
-        console.log(id.params.id);
         return new Promise(function (resolve, reject) {
             connection.query(
                 "SELECT id, first_name, last_name, phone, email, age FROM phone_book WHERE id = ?", id.params.id,
                 function (err, rows) {
-                    console.log(rows);
                     if (rows === undefined) {
                         reject(rows);
                     } else {
-                        resolve(rows);
+                        resolve(rows[0]);
                     }
                 }
             )
@@ -99,14 +96,6 @@ class UserRepos {
         return new Promise(function (resolve, reject) {
             connection.query(
                 "SELECT * FROM exterm.phone_book WHERE first_name LIKE CONCAT('%', ?,  '%')", names,
-/**
- var value = 'ee20e966289cd7';
- connection.query('SELECT * from django_session where session_key like ?', '%' + value + '%', ...)
- * */
-/*                function () {
-                    console.log(arguments);
-                    return {search: names}
-                },*/
                 function (err, rows) {
                     if (rows === undefined) {
                         reject();

@@ -1,18 +1,18 @@
 <app-pec-modal id="pec-modalEdit">
-  <div>
-    <form action="" *ngFor="let userito of userListForEdit">
+  <div *ngIf="userInfo !== undefined">
+    <form action="">
       <label for="name">FirstName</label>
-      <input type="text" id="name" [(ngModel)]="userito.first_name" name="first"/>
+      <input type="text" id="name" [(ngModel)]="userInfo.first_name" name="first"/>
       <label for="lastName">LastName</label>
-      <input type="text" id="lastName" [(ngModel)]="userito.last_name" name="last"/>
+      <input type="text" id="lastName" [(ngModel)]="userInfo.last_name" name="last"/>
       <label for="phone">Phone</label>
-      <input type="text" id="phone" [(ngModel)]="userito.phone" name="phone"/>
+      <input type="text" id="phone" [(ngModel)]="userInfo.phone" name="phone"/>
       <label for="email">E-mail</label>
-      <input type="text" id="email" [(ngModel)]="userito.email" name="email"/>
+      <input type="text" id="email" [(ngModel)]="userInfo.email" name="email"/>
       <label for="age">Age</label>
-      <input type="data" id="age" [(ngModel)]="userito.age" name="age"/>
+      <input type="data" id="age" [(ngModel)]="userInfo.age" name="age"/>
       <div class="subbtn">
-        <button class="registrationbtn" (click)="editUserSub(userito, $event.target.value)">Добавить</button>
+        <button type="submit" class="registrationbtn" (click)="editUserSub('pec-modalEdit', userInfo)">Change</button>
         <button class="registrationbtn" (click)="closeModal('pec-modalEdit')">cancel</button>
       </div>
     </form>

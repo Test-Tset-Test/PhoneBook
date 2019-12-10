@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ActivatedRoute, Router, RouterLinkActive} from '@angular/router';
-import {AddUserRequest} from '../../../../api/Model/user.model';
+import {AddUserRequest, UserInfo} from '../../../../api/Model/user.model';
 import {take} from 'rxjs/operators';
 import {UserService} from '../../../../service/user.service';
 
@@ -10,7 +10,7 @@ import {UserService} from '../../../../service/user.service';
   styleUrls: ['userPage.component.scss']
 })
 export class UserPageComponent implements OnInit {
-  private userListForEdit: AddUserRequest;
+  private userPageInfo: UserInfo;
   private id;
 
   constructor(private userService: UserService,
@@ -23,14 +23,12 @@ export class UserPageComponent implements OnInit {
   }
 
   getUserChoice(id: string) {
-    console.log(id);
     this.userService.getUserById(id)
       .pipe(
         take(1)
       )
       .subscribe((response: any) => {
-        console.log(response);
-        this.userListForEdit = response;
+        this.userPageInfo = response;
       });
   }
 }

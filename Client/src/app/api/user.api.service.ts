@@ -3,7 +3,13 @@ import {BaseApiService} from './base.api.service';
 import {UserModel} from '../models/user.model';
 import {Observable} from 'rxjs';
 import {HttpEvent} from '@angular/common/http';
-import {AddUserRequest, AddUserResponse} from './Model/user.model';
+import {
+  AddUserRequest,
+  AddUserResponse, DeleteUserRequest,
+  DeleteUserResponse, FilterUserResponse,
+  GetUserByIdResponse, UpdateUserRequest, UpdateUserResponse,
+  UserListResponse
+} from './Model/user.model';
 
 @Injectable()
 export class UserApiService {
@@ -17,23 +23,22 @@ export class UserApiService {
   }
 
   addNewUserInPhoneBook = (data: AddUserRequest): Observable<AddUserResponse> => {
-    console.log(JSON.stringify(data));
     return this.service.post<AddUserResponse>('/api/addUser', data);
   }
 
-  deleteUser = (id: UserModel): Observable<HttpEvent<AddUserResponse>> => {
-    return this.service.delete<AddUserResponse>('/api/userDelete' + '/' + id);
+  deleteUser = (id: DeleteUserRequest): Observable<HttpEvent<DeleteUserResponse>> => {
+    return this.service.delete<DeleteUserResponse>('/api/userDelete' + '/' + id);
   }
 
-  getUserById = (id: string): Observable<HttpEvent<AddUserResponse>> => {
-    return this.service.get<AddUserResponse>('/api/userById' + '/' + id);
+  getUserById = (id: string): Observable<HttpEvent<GetUserByIdResponse>> => {
+    return this.service.get<GetUserByIdResponse>('/api/userById' + '/' + id);
   }
 
-  updateUser = (data: AddUserRequest): Observable<AddUserResponse> => {
-    return this.service.put<AddUserResponse>('/api/updateUser', data);
+  updateUser = (data: UpdateUserRequest): Observable<UpdateUserResponse> => {
+    return this.service.put<UpdateUserResponse>('/api/updateUser', data);
   }
 
-  filterUserByName = (dataForFilter: string): Observable<HttpEvent<AddUserResponse>> => {
-    return this.service.get<AddUserResponse>('/api/filterUser' + '/' + dataForFilter);
+  filterUserByName = (dataForFilter: string): Observable<HttpEvent<FilterUserResponse>> => {
+    return this.service.get<FilterUserResponse>('/api/filterUser' + '/' + dataForFilter);
   }
 }

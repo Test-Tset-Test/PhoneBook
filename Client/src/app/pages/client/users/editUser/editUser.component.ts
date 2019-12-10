@@ -1,8 +1,14 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {ModalService} from '../../../../service/modal.service';
 import {UserService} from '../../../../service/user.service';
-import {AddUserRequest, AddUserResponse} from '../../../../api/Model/user.model';
+import {
+  AddUserRequest,
+  GetUserByIdResponse,
+  UpdateUserRequest,
+  UpdateUserResponse, UserInfo
+} from '../../../../api/Model/user.model';
 import {take} from 'rxjs/operators';
+import {UserModel} from '../../../../models/user.model';
 
 @Component({
   selector: 'app-employees-editing',
@@ -11,8 +17,8 @@ import {take} from 'rxjs/operators';
 })
 export class EditUserComponent implements OnInit {
   @Output()
-  updateUserList = new EventEmitter();
-  private userListForEdit: AddUserRequest;
+  userChange = new EventEmitter();
+  private userInfo?: UserInfo;
 
 
   constructor(private modalService: ModalService,
@@ -29,17 +35,16 @@ export class EditUserComponent implements OnInit {
         take(1)
       )
       .subscribe((response: any) => {
-      this.userListForEdit = response;
+      this.userInfo = response;
       this.modalService.open(idModal);
     });
   }
 
-  editUserSub(editUser: AddUserRequest, event: any) {
+  editUserSub(idForCloseModal: string, editUser: UpdateUserRequest) {
     this.userService.updateUser(editUser).pipe(take(1)).subscribe(() => {
-        this.updateUserList.emit(event);
-      }
-    );
-    this.closeModal('pec-modalEdit');
+      this.userChange.emit();
+      this.closeModal(idForCloseModal);
+    });
   }
 
   closeModal(idModal) {

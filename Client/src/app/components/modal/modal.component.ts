@@ -34,8 +34,8 @@ export class ModalComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    // this.modalService.remove(this.id);
-    // this.element.remove();
+    this.modalService.remove(this.id);
+    this.element.remove();
   }
 
   open(): void {

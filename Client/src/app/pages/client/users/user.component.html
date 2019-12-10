@@ -25,7 +25,6 @@
   </table>
 </div>
 
-<app-employees-editing></app-employees-editing>
-<app-registration (updateUserList)="getUserList()"></app-registration>
+<app-registration (userChange)="getUserList()"></app-registration>
 <app-registration2 (updateUserList)="getUserList()"></app-registration2>
-<app-employees-editing (updateUserList)="getUserList()"></app-employees-editing>
+<app-employees-editing (userChange)="getUserList()"></app-employees-editing>

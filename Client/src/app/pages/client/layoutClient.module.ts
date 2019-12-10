@@ -9,8 +9,6 @@ import {EditUserModule} from './users/editUser/editUser.module';
 import {UserPageModule} from './users/userPage/userPage.module';
 import {ModalModule} from '../../components/modal/modal.module';
 import {RegistrationModule} from './registration/registration.module';
-import {LoginComponent} from './login/login.component';
-import {LoginModule} from './login/login.module';
 import {ReactiveFormsModule} from '@angular/forms';
 import {Registration2Module} from './registrationOnReactioveForm/registration2.module';
 import {UserComponent} from './users/user.component';
@@ -20,10 +18,8 @@ const clientRoute: Routes = [{
   path: '',
   component: LayoutClientComponent,
   children: [
-    {path: 'login', component: LoginComponent},
     {path: 'userPhoneBook', component: UserComponent},
     {path: 'userPhoneBook/:id', component: UserPageComponent},
-    // {path: 'userPhoneBook', component: UserComponent},
   ]
 }];
 
@@ -38,7 +34,6 @@ const clientRoute: Routes = [{
     UserPageModule,
     RegistrationModule,
     Registration2Module,
-    LoginModule,
     ReactiveFormsModule,
     RouterModule.forChild(clientRoute),
     ModalModule,

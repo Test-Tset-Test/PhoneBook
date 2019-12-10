@@ -13,7 +13,6 @@ class UserController {
     }
 
     addNewUser(dataUser, res) {
-        console.log(dataUser.body);
         userService.addNewUser(dataUser.body)
             .then(function (result) {
                 res.send(result);

@@ -1,11 +1,10 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {ModalModule} from '../../../components/modal/modal.module';
 import {UserService} from '../../../service/user.service';
 import {ModalService} from '../../../service/modal.service';
-import {FormBuilder, FormControl, FormGroup, ValidationErrors, Validators} from '@angular/forms';
-import {getLiteralValue} from 'codelyzer/util/getLiteralValue';
+import {FormBuilder, FormGroup, ValidationErrors, Validators} from '@angular/forms';
 import {UserModel} from '../../../models/user.model';
 import {take} from 'rxjs/operators';
+import {AddUserRequest} from '../../../api/Model/user.model';
 
 @Component({
   selector: 'app-registration2',
@@ -29,12 +28,20 @@ export class Registration2Component implements OnInit {
   }
 
 
-  createNewUser(idForCloseModal: string, event: string) {
-    this.serviceApi.addNewUserInPhoneBook(this.user).pipe(take(1)).subscribe(() => {
+  createNewUser(idForCloseModal: string) {
+    const payLoad: AddUserRequest = {
+      first_name: this.user.firstName,
+      last_name: this.user.lastName,
+      phone: this.user.phone,
+      email: this.user.email,
+      password: this.user.password,
+      age: this.user.age,
+    };
+    this.serviceApi.addNewUserInPhoneBook(payLoad).pipe(take(1)).subscribe(() => {
+      // UpdateUserList
+      this.updateUserList.emit();
       // close Modal
       this.onSubmit(idForCloseModal);
-      // UpdateUserList
-      this.updateUserList.emit(event);
     });
   }
 
@@ -117,7 +124,6 @@ export class Registration2Component implements OnInit {
   }
 
   onSubmit(id: string) {
-    console.log("fasdwa");
     const controls = this.userForm.controls;
 
     if (this.userForm.invalid) {
