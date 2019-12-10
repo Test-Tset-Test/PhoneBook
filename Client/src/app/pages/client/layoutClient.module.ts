@@ -13,6 +13,9 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {Registration2Module} from './registrationOnReactioveForm/registration2.module';
 import {UserComponent} from './users/user.component';
 import {UserPageComponent} from './users/userPage/userPage.component';
+import {SpinnerModule} from "./spinner/spinner.module";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
+import {InterceptorService} from '../../api/interceptor.service';
 
 const clientRoute: Routes = [{
   path: '',
@@ -35,13 +38,21 @@ const clientRoute: Routes = [{
     RegistrationModule,
     Registration2Module,
     ReactiveFormsModule,
+    SpinnerModule,
+    HttpClientModule,
     RouterModule.forChild(clientRoute),
     ModalModule,
   ],
   exports: [
     LayoutClientComponent
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: InterceptorService,
+      multi: true,
+    }
+  ],
 })
 export class LayoutClientModule {
 

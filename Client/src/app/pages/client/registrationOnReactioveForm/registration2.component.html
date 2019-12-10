@@ -108,7 +108,7 @@
                  formControlName="passwordRepeat"
                  [(ngModel)]="user.passwordRepeat"/>
         </div>
-        <div class="error">
+        <div class="error" *ngIf="isControlInvalid('passwordRepeat')">
           <ng-container [ngTemplateOutlet]="listErrors" [ngTemplateOutletContext]="{errors: getControlErrors('passwordRepeat')}">
           </ng-container>
         </div>
