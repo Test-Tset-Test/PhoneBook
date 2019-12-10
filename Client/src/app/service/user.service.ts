@@ -5,7 +5,7 @@ import {Observable} from 'rxjs';
 import {
   AddUserRequest,
   AddUserResponse, DeleteUserRequest,
-  FilterUserResponse, GetUserByIdResponse,
+  FilterUserResponse, GetUserByIdRequest, GetUserByIdResponse,
   UpdateUserRequest,
   UpdateUserResponse, UserInfo
 } from '../api/Model/user.model';
@@ -28,7 +28,7 @@ export class UserService {
     return this.userApiService.deleteUser(id);
   }
 
-  getUserById = (id: string): Observable<HttpEvent<GetUserByIdResponse>> => {
+  getUserById = (id: GetUserByIdRequest): Observable<HttpEvent<GetUserByIdResponse>> => {
     return this.userApiService.getUserById(id);
   }
 

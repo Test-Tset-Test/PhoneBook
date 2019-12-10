@@ -6,7 +6,7 @@ import {HttpEvent} from '@angular/common/http';
 import {
   AddUserRequest,
   AddUserResponse, DeleteUserRequest,
-  DeleteUserResponse, FilterUserResponse,
+  DeleteUserResponse, FilterUserResponse, GetUserByIdRequest,
   GetUserByIdResponse, UpdateUserRequest, UpdateUserResponse,
   UserListResponse
 } from './Model/user.model';
@@ -30,7 +30,7 @@ export class UserApiService {
     return this.service.delete<DeleteUserResponse>('/api/userDelete' + '/' + id);
   }
 
-  getUserById = (id: string): Observable<HttpEvent<GetUserByIdResponse>> => {
+  getUserById = (id: GetUserByIdRequest): Observable<HttpEvent<GetUserByIdResponse>> => {
     return this.service.get<GetUserByIdResponse>('/api/userById' + '/' + id);
   }
 

@@ -23,7 +23,7 @@ export interface UserListResponse extends UserInfo {
   id: string;
 };
 
-export type GetUserByIdRequest = UserInfo;
+export type GetUserByIdRequest = string;
 export type GetUserByIdResponse = UserInfo;
 
 export type FilterUserRequest = UserInfo;

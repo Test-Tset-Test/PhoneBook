@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ActivatedRoute, Router, RouterLinkActive} from '@angular/router';
-import {AddUserRequest, UserInfo} from '../../../../api/Model/user.model';
+import {AddUserRequest, GetUserByIdRequest, UserInfo} from '../../../../api/Model/user.model';
 import {take} from 'rxjs/operators';
 import {UserService} from '../../../../service/user.service';
 
@@ -22,7 +22,7 @@ export class UserPageComponent implements OnInit {
     this.getUserChoice(this.id);
   }
 
-  getUserChoice(id: string) {
+  getUserChoice(id: GetUserByIdRequest) {
     this.userService.getUserById(id)
       .pipe(
         take(1)
